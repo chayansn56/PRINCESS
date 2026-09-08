@@ -166,60 +166,144 @@ footer{text-align:center;color:var(--muted);font-size:12px;margin-top:20px}
 
 <h3>🌊 OUR ADVENTURES</h3>
 <p class="small">Which part of our adventures do you remember or like the most?</p>
-<div class="grid memory-options">
-  <button type="button" class="choice memory-choice" data-group="adventures" data-value="Water / sea">🌊 <b>Water / Sea</b></button>
-  <button type="button" class="choice memory-choice" data-group="adventures" data-value="Nature & trees">🌳 <b>Nature & Trees</b></button>
-  <button type="button" class="choice memory-choice" data-group="adventures" data-value="Travelling together">✈️ <b>Travelling Together</b></button>
-  <button type="button" class="choice memory-choice" data-group="adventures" data-value="Exploring new places">📍 <b>Exploring New Places</b></button>
+<div class="grid">
+<button type="button" class="choice" onclick="memoryToggle(this,'adventures','Water / Sea')">🌊 <b>Water / Sea</b></button>
+<button type="button" class="choice" onclick="memoryToggle(this,'adventures','Nature & Trees')">🌳 <b>Nature & Trees</b></button>
+<button type="button" class="choice" onclick="memoryToggle(this,'adventures','Travelling Together')">✈️ <b>Travelling Together</b></button>
+<button type="button" class="choice" onclick="memoryToggle(this,'adventures','Exploring New Places')">📍 <b>Exploring New Places</b></button>
 </div>
 
 <h3>🍽️ OUR FOOD MOMENTS</h3>
 <p class="small">Which food memory do you remember or like the most?</p>
-<div class="grid memory-options">
-  <button type="button" class="choice memory-choice" data-group="food" data-value="Shrimp">🍤 <b>Shrimp</b></button>
-  <button type="button" class="choice memory-choice" data-group="food" data-value="Beef">🥩 <b>Beef</b></button>
-  <button type="button" class="choice memory-choice" data-group="food" data-value="Pork">🐖 <b>Pork</b></button>
-  <button type="button" class="choice memory-choice" data-group="food" data-value="Frog">🐸 <b>Frog</b></button>
-  <button type="button" class="choice memory-choice" data-group="food" data-value="Eating outside together">🍽️ <b>Eating Outside Together</b></button>
+<div class="grid">
+<button type="button" class="choice" onclick="memoryToggle(this,'food','Shrimp')">🍤 <b>Shrimp</b></button>
+<button type="button" class="choice" onclick="memoryToggle(this,'food','Beef')">🥩 <b>Beef</b></button>
+<button type="button" class="choice" onclick="memoryToggle(this,'food','Pork')">🐖 <b>Pork</b></button>
+<button type="button" class="choice" onclick="memoryToggle(this,'food','Frog')">🐸 <b>Frog</b></button>
+<button type="button" class="choice" onclick="memoryToggle(this,'food','Eating Outside Together')">🍽️ <b>Eating Outside Together</b></button>
 </div>
 
 <h3>🤝 OUR LITTLE MOMENTS</h3>
 <p class="small">Which little thing do you remember or like the most?</p>
-<div class="grid memory-options">
-  <button type="button" class="choice memory-choice" data-group="little" data-value="Holding hands">🤝 <b>Holding Hands</b></button>
-  <button type="button" class="choice memory-choice" data-group="little" data-value="Laughing together">😂 <b>Laughing Together</b></button>
-  <button type="button" class="choice memory-choice" data-group="little" data-value="Listening to music">🎵 <b>Listening to Music</b></button>
-  <button type="button" class="choice memory-choice" data-group="little" data-value="Flowers / surprises">🌹 <b>Flowers / Little Surprises</b></button>
-  <button type="button" class="choice memory-choice" data-group="little" data-value="Just being together">❤️ <b>Just Being Together</b></button>
+<div class="grid">
+<button type="button" class="choice" onclick="memoryToggle(this,'little','Holding Hands')">🤝 <b>Holding Hands</b></button>
+<button type="button" class="choice" onclick="memoryToggle(this,'little','Laughing Together')">😂 <b>Laughing Together</b></button>
+<button type="button" class="choice" onclick="memoryToggle(this,'little','Listening to Music')">🎵 <b>Listening to Music</b></button>
+<button type="button" class="choice" onclick="memoryToggle(this,'little','Flowers / Little Surprises')">🌹 <b>Flowers / Little Surprises</b></button>
+<button type="button" class="choice" onclick="memoryToggle(this,'little','Just Being Together')">❤️ <b>Just Being Together</b></button>
 </div>
 
 <h3>💕 THE ONE THAT MEANS THE MOST</h3>
 <p class="small">Which memory would you choose to experience again?</p>
-<div class="grid memory-final-options">
-  <button type="button" class="choice final-memory" data-value="An adventure together">🌊 <b>An Adventure Together</b></button>
-  <button type="button" class="choice final-memory" data-value="Eating together">🍽️ <b>Eating Together</b></button>
-  <button type="button" class="choice final-memory" data-value="Holding hands">🤝 <b>Holding Hands</b></button>
-  <button type="button" class="choice final-memory" data-value="A simple day together">❤️ <b>A Simple Day Together</b></button>
+<div class="grid">
+<button type="button" class="choice" onclick="memoryToggle(this,'most','An Adventure Together')">🌊 <b>An Adventure Together</b></button>
+<button type="button" class="choice" onclick="memoryToggle(this,'most','Eating Together')">🍽️ <b>Eating Together</b></button>
+<button type="button" class="choice" onclick="memoryToggle(this,'most','Holding Hands')">🤝 <b>Holding Hands</b></button>
+<button type="button" class="choice" onclick="memoryToggle(this,'most','A Simple Day Together')">❤️ <b>A Simple Day Together</b></button>
 </div>
 
 <div class="own-answer">
-  <h3>✍️ Add Your Own Answer</h3>
-  <p class="small">Something else you remember that isn't here?</p>
-  <input id="ownMemoryAnswer" type="text" placeholder="Write your own memory...">
-  <button type="button" class="btn soft" id="addMemoryAnswer">ADD MY ANSWER ❤️</button>
-  <div id="ownMemoryList" class="chips"></div>
+<h3>✍️ Add Your Own Answer</h3>
+<p class="small">Something else you remember that isn't here?</p>
+<input id="ownMemoryAnswer" type="text" placeholder="Write your own memory...">
+<button type="button" class="btn soft" onclick="addOwnMemory()">ADD MY ANSWER ❤️</button>
+<div id="ownMemoryList" class="chips"></div>
 </div>
 
 <div id="memorySummary" class="notice">
 <b>🗺️ YOUR MEMORY MAP</b><br><br>
-No choices yet. Choose the things you remember most. ❤️
+Choose anything that means something to you. ❤️
 </div>
 
 <div class="actions">
-  <button class="btn soft" onclick="go(5)">← Back</button>
-  <button id="next6" class="btn pink next" disabled onclick="go(7)">NEXT LEVEL →</button>
+<button class="btn soft" onclick="go(5)">← Back</button>
+<button id="next6" class="btn pink next" disabled onclick="go(7)">NEXT LEVEL →</button>
 </div>
 </div></section>
+<script>
+(function(){
+  var memoryState={adventures:[],food:[],little:[],most:[],own:[]};
+
+  function esc(v){
+    return String(v).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+  }
+
+  function total(){
+    return memoryState.adventures.length+memoryState.food.length+memoryState.little.length+memoryState.most.length+memoryState.own.length;
+  }
+
+  function render(){
+    var n=total();
+    var status=document.getElementById("memStatus");
+    var bar=document.getElementById("memBar");
+    var summary=document.getElementById("memorySummary");
+    if(status) status.innerHTML="<b>"+n+" choices made</b>";
+    if(bar) bar.style.width=Math.min(100,(n/5)*100)+"%";
+
+    var out="<b>🗺️ YOUR MEMORY MAP</b><br><br>";
+    var any=false;
+    [["adventures","🌊 Adventures"],["food","🍽️ Food moments"],["little","🤝 Little moments"],["most","💕 Most meaningful"],["own","✍️ Princess's own answers"]].forEach(function(pair){
+      var arr=memoryState[pair[0]];
+      if(arr.length){
+        any=true;
+        out+="<b>"+pair[1]+"</b><br>";
+        arr.forEach(function(v){out+="<span class='memory-summary-item'>"+esc(v)+"</span>"});
+        out+="<br><br>";
+      }
+    });
+    if(!any) out+="Choose anything that means something to you. ❤️";
+
+    // Require at least one answer in the four main sections.
+    var ready=memoryState.adventures.length>0 &&
+              memoryState.food.length>0 &&
+              memoryState.little.length>0 &&
+              memoryState.most.length>0;
+    if(ready) out+="<b>✅ Memory map complete.</b><br>Princess can continue.";
+    if(summary) summary.innerHTML=out;
+    var next=document.getElementById("next6");
+    if(next) next.disabled=!ready;
+  }
+
+  window.memoryToggle=function(btn,group,value){
+    var arr=memoryState[group];
+    var i=arr.indexOf(value);
+    if(i===-1){
+      arr.push(value);
+      btn.classList.add("selected");
+      if(window.add) window.add(1,10);
+    }else{
+      arr.splice(i,1);
+      btn.classList.remove("selected");
+    }
+    render();
+  };
+
+  window.addOwnMemory=function(){
+    var input=document.getElementById("ownMemoryAnswer");
+    var value=(input.value||"").trim();
+    if(!value){
+      document.getElementById("memorySummary").innerHTML="<b>✍️ Add Your Own Answer</b><br><br>Write something first. ❤️";
+      return;
+    }
+    memoryState.own.push(value);
+    var list=document.getElementById("ownMemoryList");
+    var chip=document.createElement("span");
+    chip.className="chip";
+    chip.textContent="✍️ "+value;
+    if(list) list.appendChild(chip);
+    input.value="";
+    if(window.add) window.add(1,10);
+    render();
+  };
+
+  window.getMemoryAnswers=function(){
+    return JSON.stringify(memoryState);
+  };
+
+  // Expose immediately and render once after this script loads.
+  render();
+})();
+</script>
 
 <section class="screen" id="s7"><div class="card">
 <div class="eyebrow">LEVEL 6 · NO JOKES NOW</div><h2>❤️ One Serious Level</h2>
@@ -477,7 +561,7 @@ byId("msgForm").addEventListener("submit",function(){
   byId("extraRoyalEmail").value=[...byId("ownRoyalList").children].map(x=>x.textContent).join("\n");
   byId("customDayEmail").value="Food: "+day.food.join(" · ")+" | Place: "+day.place.join(" · ")+" | Vibe: "+day.vibe.join(" · ");
   byId("extraMemoryEmail").value=[...byId("ownMemoryList").children].map(x=>x.textContent).join("\n");
-  byId("apologyReplyEmail").value=(byId("ownApologyReply").value||"").trim();if(window.__memoryAnswersForEmail)byId("memoryAnswersEmail").value=window.__memoryAnswersForEmail();
+  byId("apologyReplyEmail").value=(byId("ownApologyReply").value||"").trim();if(byId("memoryAnswersEmail")&&window.getMemoryAnswers)byId("memoryAnswersEmail").value=window.getMemoryAnswers();if(window.__memoryAnswersForEmail)byId("memoryAnswersEmail").value=window.__memoryAnswersForEmail();
   status.innerHTML='<div class="notice">💌 Your message is being sent...</div>';
   setTimeout(function(){
     status.innerHTML='<div class="notice"><b>💌 Submitted.</b><br>If Formspree is connected to your email, the message and the answers will arrive there. ❤️</div>';
