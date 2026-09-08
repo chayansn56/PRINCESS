@@ -256,9 +256,10 @@ footer{text-align:center;color:var(--muted);font-size:12px;margin-top:20px}
 <label class="small" for="finalMessage">Your message</label>
 <textarea id="finalMessage" name="message" placeholder="Write anything you want to tell me..."></textarea>
 <input type="hidden" id="game_answers" name="game_answers">
-<button id="sendMessageBtn" type="submit" class="btn pink">SEND MESSAGE ❤️</button>
+<button id="sendMessageBtn" type="submit" class="btn pink">SEND MESSAGE BY EMAIL ❤️</button>
+<button type="button" class="btn" id="whatsappBtn">OPEN WHATSAPP 💬❤️</button>
 </form>
-<div id="send" class="feedback"></div>
+<p class="small">WhatsApp will open with your message ready to send. Princess still presses Send herself.</p><div id="send" class="feedback"></div>
 <div id="send"></div>
 </div></section>
 </div>
@@ -508,6 +509,23 @@ update();
       if(status)status.innerHTML="<div class='notice'><b>💌 Submitted.</b><br>Your message has been sent to the Formspree form. ❤️</div>";
       if(btn){btn.disabled=false;btn.textContent="SEND MESSAGE ❤️";}
     },2000);
+  });
+})();
+</script>
+
+<script>
+(function(){
+  var btn=document.getElementById("whatsappBtn");
+  if(!btn)return;
+  btn.addEventListener("click",function(){
+    var box=document.getElementById("finalMessage");
+    var message=(box && box.value ? box.value.trim() : "");
+    if(!message){
+      message="Princess has something to tell you from Princess Quest. ❤️";
+    }
+    var text="👑 Princess Quest ❤️\n\n"+message;
+    var url="https://wa.me/919990771007?text="+encodeURIComponent(text);
+    window.open(url,"_blank");
   });
 })();
 </script>
