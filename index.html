@@ -248,17 +248,17 @@ footer{text-align:center;color:var(--muted);font-size:12px;margin-top:20px}
 <h3>💌 Princess's message box</h3>
 <p class="small">You don't have to write anything. This is completely your choice.</p>
 <iframe name="formspreeFrame" id="formspreeFrame" style="display:none"></iframe>
-<form id="msgForm" action="https://formspree.io/f/xnpqgkdj" method="POST" target="formspreeFrame">
+<iframe name="formspreeResult" id="formspreeResult" style="display:none"></iframe>
+<form id="msgForm" action="https://formspree.io/f/xnpqgkdj" method="POST" target="formspreeResult">
 <input type="hidden" name="_subject" value="Princess Quest — Princess left a message ❤️">
+<input type="hidden" name="page" value="Princess Quest">
+<input type="hidden" name="game_version" value="EMAIL FIXED">
+<label class="small" for="finalMessage">Your message</label>
 <textarea id="finalMessage" name="message" placeholder="Write anything you want to tell me..."></textarea>
-<input type="hidden" id="extraCluesEmail" name="extra_clues">
-<input type="hidden" id="extraBugsEmail" name="extra_bugs">
-<input type="hidden" id="extraRoyalEmail" name="extra_royal_commands">
-<input type="hidden" id="customDayEmail" name="custom_day_choices">
-<input type="hidden" id="extraMemoryEmail" name="extra_memories">
-<input type="hidden" id="apologyReplyEmail" name="princess_reflection"><input type="hidden" id="memoryAnswersEmail" name="memory_preferences">
-<button class="btn pink" type="submit">SEND MESSAGE ❤️</button>
+<input type="hidden" id="game_answers" name="game_answers">
+<button id="sendMessageBtn" type="submit" class="btn pink">SEND MESSAGE ❤️</button>
 </form>
+<div id="send" class="feedback"></div>
 <div id="send"></div>
 </div></section>
 </div>
@@ -415,19 +415,6 @@ window.openMemory=function(el,i){
 window.unlockFinal=function(){
   byId("next7").disabled=!byId("understand").checked
 }
-byId("msgForm").addEventListener("submit",function(){
-  const form=this,status=byId("send");
-  byId("extraCluesEmail").value=[...byId("ownClueList").children].map(x=>x.textContent).join("\n");
-  byId("extraBugsEmail").value=[...byId("ownBugList").children].map(x=>x.textContent).join("\n");
-  byId("extraRoyalEmail").value=[...byId("ownRoyalList").children].map(x=>x.textContent).join("\n");
-  byId("customDayEmail").value="Food: "+day.food.join(" · ")+" | Place: "+day.place.join(" · ")+" | Vibe: "+day.vibe.join(" · ");
-  byId("extraMemoryEmail").value=[...byId("ownMemoryList").children].map(x=>x.textContent).join("\n");
-  byId("apologyReplyEmail").value=(byId("ownApologyReply").value||"").trim();if(byId("memoryAnswersEmail")&&window.getMemoryAnswers)byId("memoryAnswersEmail").value=window.getMemoryAnswers();
-  status.innerHTML='<div class="notice">💌 Your message is being sent...</div>';
-  setTimeout(function(){
-    status.innerHTML='<div class="notice"><b>💌 Submitted.</b><br>If Formspree is connected to your email, the message and the answers will arrive there. ❤️</div>';
-  },1200);
-});
 for(let i=0;i<12;i++){const h=document.createElement("div");h.className="heart";h.textContent="♥";h.style.left=Math.random()*100+"%";h.style.animationDelay=Math.random()*7+"s";h.style.fontSize=(12+Math.random()*18)+"px";document.body.appendChild(h)}
 update();
 })();
@@ -491,6 +478,37 @@ update();
 
   window.getMemoryAnswers=function(){return JSON.stringify(state);};
   render();
+})();
+</script>
+
+<script>
+(function(){
+  var form=document.getElementById("msgForm");
+  if(!form)return;
+
+  form.addEventListener("submit",function(){
+    var lines=[];
+
+    document.querySelectorAll(".memoryOption.selected").forEach(function(el){
+      lines.push("Memory: "+el.textContent.trim().replace(/\s+/g," "));
+    });
+    document.querySelectorAll("#ownAdventureList .chip,#ownFoodList .chip,#ownLittleList .chip,#ownMostList .chip").forEach(function(el){
+      lines.push("Own memory: "+el.textContent.trim());
+    });
+
+    var answers=document.getElementById("game_answers");
+    if(answers)answers.value=lines.join("\n");
+
+    var btn=document.getElementById("sendMessageBtn");
+    var status=document.getElementById("send");
+    if(btn){btn.disabled=true;btn.textContent="SENDING... 💌";}
+    if(status)status.innerHTML="<div class='notice'>💌 Sending your message...</div>";
+
+    setTimeout(function(){
+      if(status)status.innerHTML="<div class='notice'><b>💌 Submitted.</b><br>Your message has been sent to the Formspree form. ❤️</div>";
+      if(btn){btn.disabled=false;btn.textContent="SEND MESSAGE ❤️";}
+    },2000);
+  });
 })();
 </script>
 </body>
