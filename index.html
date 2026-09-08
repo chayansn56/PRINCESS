@@ -23,13 +23,11 @@ h2{font-size:clamp(31px,6vw,52px);margin:7px 0 17px}h3{margin:24px 0 10px}p{font
 .hero{font-size:72px}.notice{background:var(--soft);border:1px solid var(--line);border-radius:19px;padding:16px;margin:18px 0}
 .small{font-size:13px;color:var(--muted)}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin:15px 0}
-
-.memoryOption{position:relative;z-index:20;display:block;width:100%;border:1px solid var(--line);background:#fff;border-radius:18px;padding:16px;min-height:82px;text-align:left;cursor:pointer;user-select:none;pointer-events:auto;color:var(--ink)}
+.memoryGrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin:14px 0}
+.memoryOption{display:block!important;position:relative;z-index:100;width:100%;min-height:80px;border:1px solid var(--line);border-radius:18px;background:#fff;color:var(--ink);padding:16px;text-align:left;cursor:pointer!important;pointer-events:auto!important;user-select:none}
 .memoryOption:hover{border-color:var(--pink);transform:translateY(-2px)}
-.memoryOption.selected{border:2px solid var(--pink);background:#fff4f9;box-shadow:0 8px 22px #c94f8418}
-.memoryOption b{display:inline!important;margin:0 0 0 4px}
-.locked-next{opacity:.42}
-.locked-next.ready{opacity:1}
+.memoryOption.selected{border:2px solid var(--pink);background:#fff6fa;box-shadow:0 7px 20px #c94f8418}
+.memoryOption b{display:inline!important;margin-left:4px}
 .choice{position:relative;border:1px solid var(--line);background:#fff;border-radius:20px;padding:16px;text-align:left;min-height:88px;transition:.18s}
 .choice:hover{transform:translateY(-2px);box-shadow:0 10px 28px #c94f8417}.choice.selected{border:2px solid var(--pink);background:#fff7fb}.choice.selected:after{content:"✓";position:absolute;right:10px;top:9px;width:23px;height:23px;line-height:23px;text-align:center;background:var(--pink);color:#fff;border-radius:50%;font-size:12px}
 .choice.locked{opacity:.43;pointer-events:none;filter:grayscale(.4)}.choice.correct{border:2px solid var(--good);background:#f2fbf5}.choice.wrong{border:2px solid #d889a8;background:#fff1f6}
@@ -162,64 +160,61 @@ footer{text-align:center;color:var(--muted);font-size:12px;margin-top:20px}
 <div class="eyebrow">LEVEL 5 · MEMORY LANE</div>
 <h2>🗺️ What Do You Remember Most?</h2>
 <p>Now Princess gets to choose. ❤️</p>
-<p>Choose as many answers as you like. You need <b>at least one choice in each section</b> before continuing.</p>
+<p><b>You do not have to answer everything.</b> Pick whatever you want, in any section.</p>
 
 <div class="level-status">
-  <span id="memStatus"><b>0 / 4 sections answered</b></span>
+  <span id="memStatus"><b>0 choices made</b></span>
   <span class="small">⭐ +10 each</span>
 </div>
 <div class="taskbar"><span id="memBar"></span></div>
 
 <h3>🌊 OUR ADVENTURES</h3>
 <p class="small">Which part of our adventures do you remember or like the most?</p>
-<div class="grid">
-<button type="button" class="memoryOption" data-group="adventures" data-value="Water / Sea" onclick="memoryPick(this)">🌊 <b>Water / Sea</b></button>
-<button type="button" class="memoryOption" data-group="adventures" data-value="Nature & Trees" onclick="memoryPick(this)">🌳 <b>Nature & Trees</b></button>
-<button type="button" class="memoryOption" data-group="adventures" data-value="Travelling Together" onclick="memoryPick(this)">✈️ <b>Travelling Together</b></button>
-<button type="button" class="memoryOption" data-group="adventures" data-value="Exploring New Places" onclick="memoryPick(this)">📍 <b>Exploring New Places</b></button>
+<div class="memoryGrid">
+<button type="button" class="memoryOption" onclick="memToggle(this,'adventures','Water / Sea')">🌊 <b>Water / Sea</b></button>
+<button type="button" class="memoryOption" onclick="memToggle(this,'adventures','Nature & Trees')">🌳 <b>Nature & Trees</b></button>
+<button type="button" class="memoryOption" onclick="memToggle(this,'adventures','Travelling Together')">✈️ <b>Travelling Together</b></button>
+<button type="button" class="memoryOption" onclick="memToggle(this,'adventures','Exploring New Places')">📍 <b>Exploring New Places</b></button>
 </div>
-<div class="own"><b>✍️ Add your own adventure answer</b><input id="ownAdventure" type="text" placeholder="Something else you remember..."><button type="button" class="btn soft" onclick="addOwnMemory('adventures','ownAdventure','ownAdventureList')">ADD</button><div id="ownAdventureList"></div></div>
+<div class="own"><b>✍️ Add your own adventure answer</b><input id="ownAdv" type="text" placeholder="Something else you remember..."><button type="button" class="btn soft" onclick="memOwn('adventures','ownAdv','ownAdvList')">ADD</button><div id="ownAdvList"></div></div>
 
 <h3>🍽️ OUR FOOD MOMENTS</h3>
 <p class="small">Which food memory do you remember or like the most?</p>
-<div class="grid">
-<button type="button" class="memoryOption" data-group="food" data-value="Shrimp" onclick="memoryPick(this)">🍤 <b>Shrimp</b></button>
-<button type="button" class="memoryOption" data-group="food" data-value="Beef" onclick="memoryPick(this)">🥩 <b>Beef</b></button>
-<button type="button" class="memoryOption" data-group="food" data-value="Pork" onclick="memoryPick(this)">🐖 <b>Pork</b></button>
-<button type="button" class="memoryOption" data-group="food" data-value="Frog" onclick="memoryPick(this)">🐸 <b>Frog</b></button>
-<button type="button" class="memoryOption" data-group="food" data-value="Eating Outside Together" onclick="memoryPick(this)">🍽️ <b>Eating Outside Together</b></button>
+<div class="memoryGrid">
+<button type="button" class="memoryOption" onclick="memToggle(this,'food','Shrimp')">🍤 <b>Shrimp</b></button>
+<button type="button" class="memoryOption" onclick="memToggle(this,'food','Beef')">🥩 <b>Beef</b></button>
+<button type="button" class="memoryOption" onclick="memToggle(this,'food','Pork')">🐖 <b>Pork</b></button>
+<button type="button" class="memoryOption" onclick="memToggle(this,'food','Frog')">🐸 <b>Frog</b></button>
+<button type="button" class="memoryOption" onclick="memToggle(this,'food','Eating Outside Together')">🍽️ <b>Eating Outside Together</b></button>
 </div>
-<div class="own"><b>✍️ Add your own food memory</b><input id="ownFoodMemory" type="text" placeholder="Something else..."><button type="button" class="btn soft" onclick="addOwnMemory('food','ownFoodMemory','ownFoodList')">ADD</button><div id="ownFoodList"></div></div>
+<div class="own"><b>✍️ Add your own food memory</b><input id="ownFoodMem" type="text" placeholder="Something else..."><button type="button" class="btn soft" onclick="memOwn('food','ownFoodMem','ownFoodList')">ADD</button><div id="ownFoodList"></div></div>
 
 <h3>🤝 OUR LITTLE MOMENTS</h3>
 <p class="small">Which little thing do you remember or like the most?</p>
-<div class="grid">
-<button type="button" class="memoryOption" data-group="little" data-value="Holding Hands" onclick="memoryPick(this)">🤝 <b>Holding Hands</b></button>
-<button type="button" class="memoryOption" data-group="little" data-value="Laughing Together" onclick="memoryPick(this)">😂 <b>Laughing Together</b></button>
-<button type="button" class="memoryOption" data-group="little" data-value="Listening to Music" onclick="memoryPick(this)">🎵 <b>Listening to Music</b></button>
-<button type="button" class="memoryOption" data-group="little" data-value="Flowers / Little Surprises" onclick="memoryPick(this)">🌹 <b>Flowers / Little Surprises</b></button>
-<button type="button" class="memoryOption" data-group="little" data-value="Just Being Together" onclick="memoryPick(this)">❤️ <b>Just Being Together</b></button>
+<div class="memoryGrid">
+<button type="button" class="memoryOption" onclick="memToggle(this,'little','Holding Hands')">🤝 <b>Holding Hands</b></button>
+<button type="button" class="memoryOption" onclick="memToggle(this,'little','Laughing Together')">😂 <b>Laughing Together</b></button>
+<button type="button" class="memoryOption" onclick="memToggle(this,'little','Listening to Music')">🎵 <b>Listening to Music</b></button>
+<button type="button" class="memoryOption" onclick="memToggle(this,'little','Flowers / Little Surprises')">🌹 <b>Flowers / Little Surprises</b></button>
+<button type="button" class="memoryOption" onclick="memToggle(this,'little','Just Being Together')">❤️ <b>Just Being Together</b></button>
 </div>
-<div class="own"><b>✍️ Add your own little moment</b><input id="ownLittle" type="text" placeholder="Something else..."><button type="button" class="btn soft" onclick="addOwnMemory('little','ownLittle','ownLittleList')">ADD</button><div id="ownLittleList"></div></div>
+<div class="own"><b>✍️ Add your own little moment</b><input id="ownLittleMem" type="text" placeholder="Something else..."><button type="button" class="btn soft" onclick="memOwn('little','ownLittleMem','ownLittleList')">ADD</button><div id="ownLittleList"></div></div>
 
 <h3>💕 THE ONE THAT MEANS THE MOST</h3>
 <p class="small">Which memory would you choose to experience again?</p>
-<div class="grid">
-<button type="button" class="memoryOption" data-group="most" data-value="An Adventure Together" onclick="memoryPick(this)">🌊 <b>An Adventure Together</b></button>
-<button type="button" class="memoryOption" data-group="most" data-value="Eating Together" onclick="memoryPick(this)">🍽️ <b>Eating Together</b></button>
-<button type="button" class="memoryOption" data-group="most" data-value="Holding Hands" onclick="memoryPick(this)">🤝 <b>Holding Hands</b></button>
-<button type="button" class="memoryOption" data-group="most" data-value="A Simple Day Together" onclick="memoryPick(this)">❤️ <b>A Simple Day Together</b></button>
+<div class="memoryGrid">
+<button type="button" class="memoryOption" onclick="memToggle(this,'most','An Adventure Together')">🌊 <b>An Adventure Together</b></button>
+<button type="button" class="memoryOption" onclick="memToggle(this,'most','Eating Together')">🍽️ <b>Eating Together</b></button>
+<button type="button" class="memoryOption" onclick="memToggle(this,'most','Holding Hands')">🤝 <b>Holding Hands</b></button>
+<button type="button" class="memoryOption" onclick="memToggle(this,'most','A Simple Day Together')">❤️ <b>A Simple Day Together</b></button>
 </div>
-<div class="own"><b>✍️ Add your own answer</b><input id="ownMost" type="text" placeholder="Your answer..."><button type="button" class="btn soft" onclick="addOwnMemory('most','ownMost','ownMostList')">ADD</button><div id="ownMostList"></div></div>
+<div class="own"><b>✍️ Add your own answer</b><input id="ownMostMem" type="text" placeholder="Your answer..."><button type="button" class="btn soft" onclick="memOwn('most','ownMostMem','ownMostList')">ADD</button><div id="ownMostList"></div></div>
 
-<div id="memorySummary" class="notice">
-<b>🗺️ YOUR MEMORY MAP</b><br><br>
-Nothing selected yet. ❤️
-</div>
+<div id="memorySummary" class="notice"><b>🗺️ YOUR MEMORY MAP</b><br><br>Nothing selected yet. Choose whatever you want. ❤️</div>
 
 <div class="actions">
 <button class="btn soft" onclick="go(5)">← Back</button>
-<button id="n6" class="btn pink next locked-next" onclick="memoryNext()">NEXT LEVEL →</button>
+<button id="n6" class="btn pink next" onclick="memoryNext()">NEXT LEVEL →</button>
 </div>
 </div></section>
 
@@ -261,7 +256,7 @@ Nothing selected yet. ❤️
 <input type="hidden" id="extraRoyalEmail" name="extra_royal_commands">
 <input type="hidden" id="customDayEmail" name="custom_day_choices">
 <input type="hidden" id="extraMemoryEmail" name="extra_memories">
-<input type="hidden" id="apologyReplyEmail" name="princess_reflection">
+<input type="hidden" id="apologyReplyEmail" name="princess_reflection"><input type="hidden" id="memoryAnswersEmail" name="memory_preferences">
 <button class="btn pink" type="submit">SEND MESSAGE ❤️</button>
 </form>
 <div id="send"></div>
@@ -427,7 +422,7 @@ byId("msgForm").addEventListener("submit",function(){
   byId("extraRoyalEmail").value=[...byId("ownRoyalList").children].map(x=>x.textContent).join("\n");
   byId("customDayEmail").value="Food: "+day.food.join(" · ")+" | Place: "+day.place.join(" · ")+" | Vibe: "+day.vibe.join(" · ");
   byId("extraMemoryEmail").value=[...byId("ownMemoryList").children].map(x=>x.textContent).join("\n");
-  byId("apologyReplyEmail").value=(byId("ownApologyReply").value||"").trim();
+  byId("apologyReplyEmail").value=(byId("ownApologyReply").value||"").trim();if(byId("memoryAnswersEmail")&&window.getMemoryAnswers)byId("memoryAnswersEmail").value=window.getMemoryAnswers();
   status.innerHTML='<div class="notice">💌 Your message is being sent...</div>';
   setTimeout(function(){
     status.innerHTML='<div class="notice"><b>💌 Submitted.</b><br>If Formspree is connected to your email, the message and the answers will arrive there. ❤️</div>';
@@ -442,66 +437,55 @@ update();
 <script>
 (function(){
   var state={adventures:[],food:[],little:[],most:[],own:[]};
-  var titles={adventures:"🌊 Adventures",food:"🍽️ Food moments",little:"🤝 Little moments",most:"💕 Most meaningful"};
 
+  function arr(group){return state[group];}
+  function total(){
+    return state.adventures.length+state.food.length+state.little.length+state.most.length+state.own.length;
+  }
   function render(){
-    var sections=0,total=state.adventures.length+state.food.length+state.little.length+state.most.length+state.own.length;
-    ["adventures","food","little","most"].forEach(function(g){if(state[g].length)sections++;});
-
-    document.getElementById("memStatus").innerHTML="<b>"+sections+" / 4 sections answered</b>";
-    document.getElementById("memBar").style.width=(sections*25)+"%";
-
-    var out="<b>🗺️ YOUR MEMORY MAP</b><br><br>";
+    var n=total(), groups=[["adventures","🌊 Adventures"],["food","🍽️ Food moments"],["little","🤝 Little moments"],["most","💕 Most meaningful"]];
+    var summary="<b>🗺️ YOUR MEMORY MAP</b><br><br>";
     var any=false;
-
-    ["adventures","food","little","most"].forEach(function(g){
-      if(state[g].length){
-        any=true;out+="<b>"+titles[g]+"</b><br>";
-        state[g].forEach(function(v){out+="<span class='chip'>"+v+"</span> "});
-        out+="<br><br>";
+    groups.forEach(function(g){
+      if(state[g[0]].length){
+        any=true;summary+="<b>"+g[1]+"</b><br>";
+        state[g[0]].forEach(function(v){summary+="<span class='chip'>"+v+"</span> "});
+        summary+="<br><br>";
       }
     });
     if(state.own.length){
-      any=true;out+="<b>✍️ Princess's own answers</b><br>";
-      state.own.forEach(function(v){out+="<span class='chip'>"+v+"</span> "});
-      out+="<br><br>";
+      any=true;summary+="<b>✍️ Princess's own answers</b><br>";
+      state.own.forEach(function(v){summary+="<span class='chip'>"+v+"</span> "});
+      summary+="<br><br>";
     }
-    if(!any)out+="Nothing selected yet. ❤️";
-
-    var ready=(state.adventures.length>0&&state.food.length>0&&state.little.length>0&&state.most.length>0);
-    if(ready)out+="<b>✅ All four sections answered.</b><br>Next Level is ready.";
-    document.getElementById("memorySummary").innerHTML=out;
-
-    var next=document.getElementById("n6");
-    next.classList.toggle("ready",ready);
-    next.setAttribute("aria-disabled",ready?"false":"true");
-    next.title=ready?"Continue to Level 6":"Choose at least one answer in every section first";
+    if(!any)summary+="Nothing selected yet. Choose whatever you want. ❤️";
+    document.getElementById("memStatus").innerHTML="<b>"+n+" choices made</b>";
+    document.getElementById("memBar").style.width=Math.min(100,n*10)+"%";
+    document.getElementById("memorySummary").innerHTML=summary;
+    // NEXT LEVEL is intentionally always clickable. No forced completion of every section.
+    document.getElementById("n6").disabled=false;
   }
 
-  window.memoryPick=function(btn){
-    var group=btn.getAttribute("data-group"),value=btn.getAttribute("data-value"),arr=state[group];
-    var i=arr.indexOf(value);
-    if(i===-1){arr.push(value);btn.classList.add("selected");}
-    else{arr.splice(i,1);btn.classList.remove("selected");}
+  window.memToggle=function(btn,group,value){
+    var a=arr(group),i=a.indexOf(value);
+    if(i===-1){a.push(value);btn.classList.add("selected");}
+    else{a.splice(i,1);btn.classList.remove("selected");}
     render();
   };
 
-  window.addOwnMemory=function(group,inputId,listId){
+  window.memOwn=function(group,inputId,listId){
     var input=document.getElementById(inputId),value=(input.value||"").trim();
     if(!value){input.focus();return;}
     state.own.push(value);
-    var chip=document.createElement("span");chip.className="chip";chip.textContent="✍️ "+value;
+    var chip=document.createElement("span");
+    chip.className="chip";chip.textContent="✍️ "+value;
     document.getElementById(listId).appendChild(chip);
     input.value="";
     render();
   };
 
   window.memoryNext=function(){
-    var ready=(state.adventures.length>0&&state.food.length>0&&state.little.length>0&&state.most.length>0);
-    if(!ready){
-      document.getElementById("memorySummary").innerHTML="<b>🔒 ONE MORE STEP</b><br><br>Please choose at least one answer in <b>all four sections</b>: Adventures, Food, Little Moments, and The One That Means the Most. ❤️";
-      return;
-    }
+    // Always allow moving forward. Save whatever she selected.
     if(typeof go==="function")go(7);
   };
 
