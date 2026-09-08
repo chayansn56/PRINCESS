@@ -23,9 +23,9 @@ h2{font-size:clamp(31px,6vw,52px);margin:7px 0 17px}h3{margin:24px 0 10px}p{font
 .hero{font-size:72px}.notice{background:var(--soft);border:1px solid var(--line);border-radius:19px;padding:16px;margin:18px 0}
 .small{font-size:13px;color:var(--muted)}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin:15px 0}
-.memoryOption{position:relative;z-index:10;display:block;width:100%;border:1px solid var(--line);background:#fff;border-radius:18px;padding:16px;min-height:82px;text-align:left;cursor:pointer;user-select:none;pointer-events:auto}.memoryOption:hover{border-color:var(--pink)}.memoryOption.selected{border:2px solid var(--pink);background:#fff7fb}.memoryOption b{display:block;margin-bottom:5px}.choice{position:relative;border:1px solid var(--line);background:#fff;border-radius:20px;padding:16px;text-align:left;min-height:88px;transition:.18s}
+.memoryChoice{position:relative;z-index:10;display:flex;align-items:center;gap:8px;width:100%;min-height:78px;border:1px solid var(--line);background:#fff;border-radius:18px;padding:16px;cursor:pointer;user-select:none;pointer-events:auto}.memoryChoice input{width:20px;height:20px;flex:0 0 auto;accent-color:var(--pink);cursor:pointer;pointer-events:auto}.memoryChosen{border:2px solid var(--pink)!important;background:#fff7fb!important}.memoryChoice b{display:inline!important;margin:0!important}.choice{position:relative;border:1px solid var(--line);background:#fff;border-radius:20px;padding:16px;text-align:left;min-height:88px;transition:.18s}
 .choice:hover{transform:translateY(-2px);box-shadow:0 10px 28px #c94f8417}.choice.selected{border:2px solid var(--pink);background:#fff7fb}.choice.selected:after{content:"✓";position:absolute;right:10px;top:9px;width:23px;height:23px;line-height:23px;text-align:center;background:var(--pink);color:#fff;border-radius:50%;font-size:12px}
-.choice.locked{opacity:.43;pointer-events:auto;filter:grayscale(.4)}.choice.correct{border:2px solid var(--good);background:#f2fbf5}.choice.wrong{border:2px solid #d889a8;background:#fff1f6}
+.choice.locked{opacity:.43;pointer-events:none;filter:grayscale(.4)}.choice.correct{border:2px solid var(--good);background:#f2fbf5}.choice.wrong{border:2px solid #d889a8;background:#fff1f6}
 .choice b{display:block;margin-bottom:5px}.choice .tag{font-size:11px;font-weight:700;color:var(--pink);text-transform:uppercase;letter-spacing:1px}
 .btn{border:0;border-radius:999px;padding:13px 21px;background:var(--ink);color:white;font-weight:700;margin:5px}.btn.pink{background:var(--pink)}.btn.soft{background:#f7e4ed;color:#8e325f}.btn.gold{background:#c59b43}.btn:disabled{opacity:.35;cursor:not-allowed}
 .level-status{display:flex;justify-content:space-between;gap:12px;align-items:center;margin:10px 0 6px}.taskbar{height:9px;background:#f0dce5;border-radius:99px;overflow:hidden}.taskbar span{display:block;height:100%;width:0;background:var(--pink);transition:.4s}
@@ -38,12 +38,11 @@ h2{font-size:clamp(31px,6vw,52px);margin:7px 0 17px}h3{margin:24px 0 10px}p{font
 textarea,input[type="text"]{width:100%;border:1px solid var(--line);border-radius:18px;padding:14px;resize:vertical;outline:none;background:#fff}
 textarea{min-height:170px}
 .own-answer{background:#fff8fb;border:1px dashed var(--pink2);border-radius:20px;padding:16px;margin-top:15px}
-.memory-summary-item{display:inline-block;background:#fff;border:1px solid var(--line);border-radius:99px;padding:7px 10px;margin:4px;font-size:12px}.memory-section-title{font-weight:700;color:var(--pink);margin-top:12px}
 .own-answer h3{margin:0 0 8px;font-size:20px}.own-answer .btn{margin-top:9px}
 .chips{display:flex;flex-wrap:wrap;gap:7px;margin:9px 0}.chip{background:#fff;border:1px solid var(--line);border-radius:99px;padding:6px 9px;font-size:12px}
 
 footer{text-align:center;color:var(--muted);font-size:12px;margin-top:20px}
-.heart{position:fixed;bottom:-30px;opacity:.18;animation:float 7s linear infinite;pointer-events:auto;z-index:1}@keyframes float{to{transform:translateY(-110vh) rotate(20deg);opacity:0}}
+.heart{position:fixed;bottom:-30px;opacity:.18;animation:float 7s linear infinite;pointer-events:none;z-index:1}@keyframes float{to{transform:translateY(-110vh) rotate(20deg);opacity:0}}
 @media(max-width:650px){.wrap{padding:8px 10px 45px}.card{padding:22px 16px}.hero{font-size:58px}.logo{font-size:18px}}
 </style>
 </head>
@@ -153,10 +152,13 @@ footer{text-align:center;color:var(--muted);font-size:12px;margin-top:20px}
 </div></section>
 
 <section class="screen" id="s6"><div class="card">
+<div class="eyebrow">LEVEL 5 · MEMORY LANE</div><h2>🗺️ Unlock The Little Things</h2>
+<p>Open <b>all four</b> memories. Each one reveals part of the story.</p>
+<div class="<section class="screen" id="s6"><div class="card">
 <div class="eyebrow">LEVEL 5 · MEMORY LANE</div>
 <h2>🗺️ What Do You Remember Most?</h2>
 <p>Now Princess gets to choose. ❤️</p>
-<p><b>Tap any answer.</b> It will turn pink when selected. You can choose as many as you like.</p>
+<p><b>Tap the box or the answer itself.</b> Selected answers turn pink immediately. You can select as many as you like.</p>
 
 <div class="level-status">
   <span id="memStatus"><b>0 choices made</b></span>
@@ -167,92 +169,182 @@ footer{text-align:center;color:var(--muted);font-size:12px;margin-top:20px}
 <h3>🌊 OUR ADVENTURES</h3>
 <p class="small">Which part of our adventures do you remember or like the most?</p>
 <div class="grid">
-  <button type="button" class="memoryOption" onclick="memoryPick(this,'adventures','Water / Sea')">🌊 <b>Water / Sea</b></button>
-  <button type="button" class="memoryOption" onclick="memoryPick(this,'adventures','Nature & Trees')">🌳 <b>Nature & Trees</b></button>
-  <button type="button" class="memoryOption" onclick="memoryPick(this,'adventures','Travelling Together')">✈️ <b>Travelling Together</b></button>
-  <button type="button" class="memoryOption" onclick="memoryPick(this,'adventures','Exploring New Places')">📍 <b>Exploring New Places</b></button>
+<label class="memoryChoice"><input type="checkbox" class="memBox" data-group="adventures" data-value="Water / Sea"> 🌊 <b>Water / Sea</b></label>
+<label class="memoryChoice"><input type="checkbox" class="memBox" data-group="adventures" data-value="Nature & Trees"> 🌳 <b>Nature & Trees</b></label>
+<label class="memoryChoice"><input type="checkbox" class="memBox" data-group="adventures" data-value="Travelling Together"> ✈️ <b>Travelling Together</b></label>
+<label class="memoryChoice"><input type="checkbox" class="memBox" data-group="adventures" data-value="Exploring New Places"> 📍 <b>Exploring New Places</b></label>
 </div>
-<div class="own"><b>✍️ Add your own adventure answer</b><input id="ownAdventure" type="text" placeholder="Something else you remember..."><button type="button" class="btn soft" onclick="addOwnMemoryAnswer('adventures','ownAdventure','ownAdventureList')">ADD</button><div id="ownAdventureList"></div></div>
+<div class="own"><b>✍️ Add your own adventure answer</b>
+<input id="ownAdventure" type="text" placeholder="Something else you remember...">
+<button type="button" class="btn soft" id="addAdventureBtn">ADD</button>
+<div id="ownAdventureList"></div></div>
 
 <h3>🍽️ OUR FOOD MOMENTS</h3>
 <p class="small">Which food memory do you remember or like the most?</p>
 <div class="grid">
-  <button type="button" class="memoryOption" onclick="memoryPick(this,'food','Shrimp')">🍤 <b>Shrimp</b></button>
-  <button type="button" class="memoryOption" onclick="memoryPick(this,'food','Beef')">🥩 <b>Beef</b></button>
-  <button type="button" class="memoryOption" onclick="memoryPick(this,'food','Pork')">🐖 <b>Pork</b></button>
-  <button type="button" class="memoryOption" onclick="memoryPick(this,'food','Frog')">🐸 <b>Frog</b></button>
-  <button type="button" class="memoryOption" onclick="memoryPick(this,'food','Eating Outside Together')">🍽️ <b>Eating Outside Together</b></button>
+<label class="memoryChoice"><input type="checkbox" class="memBox" data-group="food" data-value="Shrimp"> 🍤 <b>Shrimp</b></label>
+<label class="memoryChoice"><input type="checkbox" class="memBox" data-group="food" data-value="Beef"> 🥩 <b>Beef</b></label>
+<label class="memoryChoice"><input type="checkbox" class="memBox" data-group="food" data-value="Pork"> 🐖 <b>Pork</b></label>
+<label class="memoryChoice"><input type="checkbox" class="memBox" data-group="food" data-value="Frog"> 🐸 <b>Frog</b></label>
+<label class="memoryChoice"><input type="checkbox" class="memBox" data-group="food" data-value="Eating Outside Together"> 🍽️ <b>Eating Outside Together</b></label>
 </div>
-<div class="own"><b>✍️ Add your own food memory</b><input id="ownFoodMemory" type="text" placeholder="Something else..."><button type="button" class="btn soft" onclick="addOwnMemoryAnswer('food','ownFoodMemory','ownFoodMemoryList')">ADD</button><div id="ownFoodMemoryList"></div></div>
+<div class="own"><b>✍️ Add your own food memory</b>
+<input id="ownFoodMemory" type="text" placeholder="Something else...">
+<button type="button" class="btn soft" id="addFoodBtn">ADD</button>
+<div id="ownFoodList"></div></div>
 
 <h3>🤝 OUR LITTLE MOMENTS</h3>
 <p class="small">Which little thing do you remember or like the most?</p>
 <div class="grid">
-  <button type="button" class="memoryOption" onclick="memoryPick(this,'little','Holding Hands')">🤝 <b>Holding Hands</b></button>
-  <button type="button" class="memoryOption" onclick="memoryPick(this,'little','Laughing Together')">😂 <b>Laughing Together</b></button>
-  <button type="button" class="memoryOption" onclick="memoryPick(this,'little','Listening to Music')">🎵 <b>Listening to Music</b></button>
-  <button type="button" class="memoryOption" onclick="memoryPick(this,'little','Flowers / Little Surprises')">🌹 <b>Flowers / Little Surprises</b></button>
-  <button type="button" class="memoryOption" onclick="memoryPick(this,'little','Just Being Together')">❤️ <b>Just Being Together</b></button>
+<label class="memoryChoice"><input type="checkbox" class="memBox" data-group="little" data-value="Holding Hands"> 🤝 <b>Holding Hands</b></label>
+<label class="memoryChoice"><input type="checkbox" class="memBox" data-group="little" data-value="Laughing Together"> 😂 <b>Laughing Together</b></label>
+<label class="memoryChoice"><input type="checkbox" class="memBox" data-group="little" data-value="Listening to Music"> 🎵 <b>Listening to Music</b></label>
+<label class="memoryChoice"><input type="checkbox" class="memBox" data-group="little" data-value="Flowers / Little Surprises"> 🌹 <b>Flowers / Little Surprises</b></label>
+<label class="memoryChoice"><input type="checkbox" class="memBox" data-group="little" data-value="Just Being Together"> ❤️ <b>Just Being Together</b></label>
 </div>
-<div class="own"><b>✍️ Add your own little moment</b><input id="ownLittle" type="text" placeholder="Something else..."><button type="button" class="btn soft" onclick="addOwnMemoryAnswer('little','ownLittle','ownLittleList')">ADD</button><div id="ownLittleList"></div></div>
+<div class="own"><b>✍️ Add your own little moment</b>
+<input id="ownLittle" type="text" placeholder="Something else...">
+<button type="button" class="btn soft" id="addLittleBtn">ADD</button>
+<div id="ownLittleList"></div></div>
 
 <h3>💕 THE ONE THAT MEANS THE MOST</h3>
 <p class="small">Which memory would you choose to experience again?</p>
 <div class="grid">
-  <button type="button" class="memoryOption" onclick="memoryPick(this,'most','An Adventure Together')">🌊 <b>An Adventure Together</b></button>
-  <button type="button" class="memoryOption" onclick="memoryPick(this,'most','Eating Together')">🍽️ <b>Eating Together</b></button>
-  <button type="button" class="memoryOption" onclick="memoryPick(this,'most','Holding Hands')">🤝 <b>Holding Hands</b></button>
-  <button type="button" class="memoryOption" onclick="memoryPick(this,'most','A Simple Day Together')">❤️ <b>A Simple Day Together</b></button>
+<label class="memoryChoice"><input type="checkbox" class="memBox" data-group="most" data-value="An Adventure Together"> 🌊 <b>An Adventure Together</b></label>
+<label class="memoryChoice"><input type="checkbox" class="memBox" data-group="most" data-value="Eating Together"> 🍽️ <b>Eating Together</b></label>
+<label class="memoryChoice"><input type="checkbox" class="memBox" data-group="most" data-value="Holding Hands"> 🤝 <b>Holding Hands</b></label>
+<label class="memoryChoice"><input type="checkbox" class="memBox" data-group="most" data-value="A Simple Day Together"> ❤️ <b>A Simple Day Together</b></label>
 </div>
-<div class="own"><b>✍️ Add your own answer</b><input id="ownMost" type="text" placeholder="Your answer..."><button type="button" class="btn soft" onclick="addOwnMemoryAnswer('most','ownMost','ownMostList')">ADD</button><div id="ownMostList"></div></div>
+<div class="own"><b>✍️ Add your own answer</b>
+<input id="ownMost" type="text" placeholder="Your answer...">
+<button type="button" class="btn soft" id="addMostBtn">ADD</button>
+<div id="ownMostList"></div></div>
 
-<div id="memorySummary" class="notice"><b>🗺️ YOUR MEMORY MAP</b><br><br>Choose at least one answer in every section. ❤️</div>
+<div id="memorySummary" class="notice">
+<b>🗺️ YOUR MEMORY MAP</b><br><br>
+Choose at least one answer in each section. ❤️
+</div>
 
 <div class="actions">
-  <button class="btn soft" onclick="go(5)">← Back</button>
-  <button id="n6" class="btn pink next" disabled onclick="go(7)">NEXT LEVEL →</button>
+<button class="btn soft" onclick="go(5)">← Back</button>
+<button id="n6" class="btn pink next" disabled onclick="go(7)">NEXT LEVEL →</button>
 </div>
 </div></section>
 
-<section class="screen" id="s7"><div class="card">
-<div class="eyebrow">LEVEL 6 · NO JOKES NOW</div><h2>❤️ One Serious Level</h2>
-<p>This level isn't a test. There are no points to win.</p>
-<p>I made this game because I wanted to make you smile, but I know a game cannot undo what happened.</p>
-<p><b>I was wrong.</b></p>
-<p>I crossed a boundary when I went into your privacy and deleted a conversation that wasn't mine to delete. I understand why that hurt you, and I'm sorry.</p>
-<p>I'm sorry for the pressure I created with repeated calls and overthinking. I need to respect your space instead of reacting from fear.</p>
-<p>I'm sorry for the things I said about your family. Whatever I meant in my head, I understand that my words hurt you. I should have spoken with respect.</p>
-<p>I understand that I need to become more independent, listen better, think before I react, and handle difficult emotions better.</p>
-<p><b>I don't want you to believe I've changed because I made this website. I want you to believe it because you see it in the way I behave.</b></p>
-<p>You don't owe me forgiveness, an answer, or a reply. I just wanted to apologize properly, without excuses and without asking you to make me feel better.</p>
-<div class="notice center"><b>I'm sorry, Princess. Truly. ❤️</b></div>
-<div class="own-answer">
-  <h3>✍️ Anything You Want Me To Know</h3>
-  <textarea id="ownApologyReply" placeholder="You can write anything here — even just one word."></textarea>
-</div>
-<label class="choice" style="display:block;cursor:pointer;margin:18px 0"><input id="understand" type="checkbox" onchange="unlockFinal()"> I understand. I can continue.</label><p class="small center">The final button is visible below and unlocks when this is checked.</p>
-<div class="actions"><button class="btn soft" onclick="go(6)">← Back</button><button id="next7" class="btn pink next" disabled onclick="go(8)">QUEST COMPLETE →</button></div>
-</div></section>
+<script>
+(function(){
+  "use strict";
 
-<section class="screen" id="s8"><div class="card center">
-<div class="hero">👑❤️</div><div class="eyebrow">LEVEL 7 · QUEST COMPLETE</div><h2>Completely Yours.</h2>
-<p class="finalbox">You made it to the end. 🎮</p>
-<p>I hope somewhere between the stupid parts, the choices, the memories, and the serious part, you felt how much you mean to me.</p>
-<p>I miss the little things — travelling, eating outside, holding your hand, music, water, trees, laughing at stupid things, and simply having you beside me.</p>
-<p><b>I love you, Princess. ❤️</b></p>
-<div class="notice"><b>Still learning.<br>Still improving.<br>Still completely yours. ❤️</b></div>
-<h3>💌 Princess's message box</h3>
-<p class="small">You don't have to write anything. This is completely your choice.</p>
-<iframe name="formspreeFrame" id="formspreeFrame" style="display:none"></iframe>
-<form id="msgForm" action="https://formspree.io/f/xnpqgkdj" method="POST" target="formspreeFrame">
-<input type="hidden" name="_subject" value="Princess Quest — Princess left a message ❤️">
+  var selected = {
+    adventures: [],
+    food: [],
+    little: [],
+    most: [],
+    own: []
+  };
+
+  function clean(v){
+    return String(v).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+  }
+
+  function refresh(){
+    var boxes = document.querySelectorAll("#s6 .memBox");
+    var total = 0;
+    var groups = {adventures:false, food:false, little:false, most:false};
+
+    boxes.forEach(function(box){
+      var label = box.parentElement;
+      if(box.checked){
+        total++;
+        groups[box.getAttribute("data-group")] = true;
+        label.classList.add("memoryChosen");
+      }else{
+        label.classList.remove("memoryChosen");
+      }
+    });
+
+    var own = selected.own.length;
+    total += own;
+
+    document.getElementById("memStatus").innerHTML = "<b>"+total+" choices made</b>";
+    document.getElementById("memBar").style.width = Math.min(100,total*10)+"%";
+
+    var summary = "<b>🗺️ YOUR MEMORY MAP</b><br><br>";
+    var any = false;
+
+    ["adventures","food","little","most"].forEach(function(group){
+      var arr = Array.prototype.slice.call(boxes)
+        .filter(function(b){return b.checked && b.getAttribute("data-group")===group;})
+        .map(function(b){return b.getAttribute("data-value");});
+      if(arr.length){
+        any=true;
+        var titles={adventures:"🌊 Adventures",food:"🍽️ Food moments",little:"🤝 Little moments",most:"💕 Most meaningful"};
+        summary+="<b>"+titles[group]+"</b><br>";
+        arr.forEach(function(v){summary+="<span class='chip'>"+clean(v)+"</span> "});
+        summary+="<br><br>";
+      }
+    });
+
+    if(own){
+      any=true;
+      summary+="<b>✍️ Princess's own answers</b><br>";
+      selected.own.forEach(function(v){summary+="<span class='chip'>"+clean(v)+"</span> "});
+      summary+="<br><br>";
+    }
+
+    if(!any) summary += "Choose at least one answer in each section. ❤️";
+
+    var ready = groups.adventures && groups.food && groups.little && groups.most;
+    if(ready) summary += "<b>✅ Memory map complete.</b><br>Princess can continue.";
+
+    document.getElementById("memorySummary").innerHTML=summary;
+    document.getElementById("n6").disabled=!ready;
+  }
+
+  window.memorySafeChange=function(box){
+    var group=box.getAttribute("data-group");
+    var value=box.getAttribute("data-value");
+    if(box.checked){
+      if(selected[group].indexOf(value)===-1) selected[group].push(value);
+    }else{
+      selected[group]=selected[group].filter(function(v){return v!==value;});
+    }
+    refresh();
+  };
+
+  function addOwn(group,inputId,listId){
+    var input=document.getElementById(inputId);
+    var value=(input.value||"").trim();
+    if(!value)return;
+    selected.own.push(value);
+    var chip=document.createElement("span");
+    chip.className="chip";
+    chip.textContent="✍️ "+value;
+    document.getElementById(listId).appendChild(chip);
+    input.value="";
+    refresh();
+  }
+
+  document.querySelectorAll("#s6 .memBox").forEach(function(box){
+    box.addEventListener("change",function(){window.memorySafeChange(this);});
+  });
+
+  document.getElementById("addAdventureBtn").addEventListener("click",function(){addOwn("adventures","ownAdventure","ownAdventureList");});
+  document.getElementById("addFoodBtn").addEventListener("click",function(){addOwn("food","ownFoodMemory","ownFoodList");});
+  document.getElementById("addLittleBtn").addEventListener("click",function(){addOwn("little","ownLittle","ownLittleList");});
+  document.getElementById("addMostBtn").addEventListener("click",function(){addOwn("most","ownMost","ownMostList");});
+
+  window.getMemoryAnswers=function(){return JSON.stringify(selected);};
+  refresh();
+})();
+</script>pe="hidden" name="_subject" value="Princess Quest — Princess left a message ❤️">
 <textarea id="finalMessage" name="message" placeholder="Write anything you want to tell me..."></textarea>
 <input type="hidden" id="extraCluesEmail" name="extra_clues">
 <input type="hidden" id="extraBugsEmail" name="extra_bugs">
 <input type="hidden" id="extraRoyalEmail" name="extra_royal_commands">
 <input type="hidden" id="customDayEmail" name="custom_day_choices">
 <input type="hidden" id="extraMemoryEmail" name="extra_memories">
-<input type="hidden" id="apologyReplyEmail" name="princess_reflection"><input type="hidden" id="memoryAnswersEmail" name="memory_preferences">
+<input type="hidden" id="apologyReplyEmail" name="princess_reflection">
 <button class="btn pink" type="submit">SEND MESSAGE ❤️</button>
 </form>
 <div id="send"></div>
@@ -350,12 +442,36 @@ window.toggleRoyal=function(el,msg){
   if(royals>=3)byId("next4").disabled=false;else byId("next4").disabled=true;
 }
 
-
+window.saveOwn=function(inputId,type){
+  const inp=byId(inputId),val=(inp.value||"").trim(); if(!val)return;
+  const list=byId(inputId+"List");
+  if(list){const chip=document.createElement("span");chip.className="chip";chip.textContent="✍️ "+val;list.appendChild(chip);}
+  inp.value="";
+  add(1,10);
+  if(type==="bug"){
+    bugFixed=Math.min(4,bugFixed+1);
+    byId("bugStatus").innerHTML="<b>"+bugFixed+" / 4 repaired</b>";
+    byId("bugBar").style.width=(bugFixed*25)+"%";
+    byId("bugFeedback").innerHTML="<span class='good'>✅ Your custom bug was added and fixed. ❤️</span>";
+    if(bugFixed===4){
+      byId("bugPanel").innerHTML="<b>✨ ALL 4 BUGS REPAIRED.</b><br>Princess-approved update installed. ❤️";
+      byId("next3").disabled=false;
+    }
+  }
+}
 window.ownDayPick=function(cat){
   const map={food:"ownFood",place:"ownPlace",vibe:"ownVibe"},inp=byId(map[cat]),val=(inp.value||"").trim(); if(!val)return;
   if(day[cat].indexOf(val)<0) day[cat].push(val);
   byId(cat+"Chosen").textContent="Selected: "+day[cat].join(" · ")+" ✍️"; inp.value="";
   if(day.food.length&&day.place.length&&day.vibe.length)byId("createBtn").disabled=false; add(1,8);
+}
+window.saveOwnMemory=function(){
+  const inp=byId("ownMemory"),val=(inp.value||"").trim();if(!val)return;
+  const chip=document.createElement("span");chip.className="chip";chip.textContent="✍️ "+val;byId("ownMemoryList").appendChild(chip);
+  byId("memoryBox").innerHTML="<b>🔓 YOUR MEMORY UNLOCKED</b><br><br>"+val;
+  inp.value=""; mems=Math.min(4,mems+1);add(1,15);
+  byId("memStatus").innerHTML="<b>"+mems+" / 4 memories opened</b>";byId("memBar").style.width=(mems*25)+"%";
+  if(mems>=4)byId("next6").disabled=false;
 }
 
 window.singlePick=function(el,cat,val){
@@ -377,11 +493,16 @@ window.createDay=function(){
   byId("next5").disabled=false;add(1,35);
   byId("createBtn").disabled=true;
 }
-
+window.openMemory=function(el,i){
+  if(el.classList.contains("selected"))return;
+  el.classList.add("selected");mems++;add(1,15);
+  byId("memoryBox").innerHTML="<b>🔓 MEMORY UNLOCKED</b><br><br>"+memText[i];
+  byId("memStatus").innerHTML="<b>"+mems+" / 4 memories opened</b>";byId("memBar").style.width=(mems*25)+"%";
+  if(mems===4)byId("next6").disabled=false;
+}
 window.unlockFinal=function(){
   byId("next7").disabled=!byId("understand").checked
 }
-
 byId("msgForm").addEventListener("submit",function(){
   const form=this,status=byId("send");
   byId("extraCluesEmail").value=[...byId("ownClueList").children].map(x=>x.textContent).join("\n");
@@ -389,7 +510,7 @@ byId("msgForm").addEventListener("submit",function(){
   byId("extraRoyalEmail").value=[...byId("ownRoyalList").children].map(x=>x.textContent).join("\n");
   byId("customDayEmail").value="Food: "+day.food.join(" · ")+" | Place: "+day.place.join(" · ")+" | Vibe: "+day.vibe.join(" · ");
   byId("extraMemoryEmail").value=[...byId("ownMemoryList").children].map(x=>x.textContent).join("\n");
-  byId("apologyReplyEmail").value=(byId("ownApologyReply").value||"").trim();if(window.__memoryAnswersForEmail)byId("memoryAnswersEmail").value=window.__memoryAnswersForEmail();
+  byId("apologyReplyEmail").value=(byId("ownApologyReply").value||"").trim();if(byId("memoryAnswersEmail")&&window.getMemoryAnswers){byId("memoryAnswersEmail").value=window.getMemoryAnswers();}
   status.innerHTML='<div class="notice">💌 Your message is being sent...</div>';
   setTimeout(function(){
     status.innerHTML='<div class="notice"><b>💌 Submitted.</b><br>If Formspree is connected to your email, the message and the answers will arrive there. ❤️</div>';
@@ -400,69 +521,5 @@ update();
 })();
 </script>
 <footer>Made for Princess ❤️</footer>
-
-<script>
-(function(){
-  "use strict";
-  var state={adventures:[],food:[],little:[],most:[],own:[]};
-
-  window.memoryPick=function(btn,group,value){
-    var a=state[group],i=a.indexOf(value);
-    if(i===-1){
-      a.push(value);
-      btn.classList.add("selected");
-      btn.setAttribute("aria-pressed","true");
-    }else{
-      a.splice(i,1);
-      btn.classList.remove("selected");
-      btn.setAttribute("aria-pressed","false");
-    }
-    render();
-  };
-
-  window.addOwnMemoryAnswer=function(group,inputId,listId){
-    var inp=document.getElementById(inputId);
-    var value=(inp.value||"").trim();
-    if(!value)return;
-    if(state[group].indexOf(value)===-1)state[group].push(value);
-    var chip=document.createElement("span");
-    chip.className="chip";
-    chip.textContent="✍️ "+value;
-    document.getElementById(listId).appendChild(chip);
-    inp.value="";
-    render();
-  };
-
-  function render(){
-    var n=state.adventures.length+state.food.length+state.little.length+state.most.length+state.own.length;
-    var status=document.getElementById("memStatus"),bar=document.getElementById("memBar");
-    if(status)status.innerHTML="<b>"+n+" choices made</b>";
-    if(bar)bar.style.width=Math.min(100,n*10)+"%";
-
-    var html="<b>🗺️ YOUR MEMORY MAP</b><br><br>";
-    var names={adventures:"🌊 Adventures",food:"🍽️ Food moments",little:"🤝 Little moments",most:"💕 Most meaningful"};
-    ["adventures","food","little","most"].forEach(function(g){
-      if(state[g].length){
-        html+="<b>"+names[g]+"</b><br>";
-        state[g].forEach(function(v){html+="<span class='chip'>"+v+"</span>"});
-        html+="<br><br>";
-      }
-    });
-    if(state.own.length){
-      html+="<b>✍️ Princess's own answers</b><br>";
-      state.own.forEach(function(v){html+="<span class='chip'>"+v+"</span>"});
-      html+="<br><br>";
-    }
-    var ready=state.adventures.length>0&&state.food.length>0&&state.little.length>0&&state.most.length>0;
-    if(!ready)html+="Choose at least one answer in every section. ❤️";
-    else html+="<b>✅ Memory map complete.</b><br>Princess can continue.";
-    document.getElementById("memorySummary").innerHTML=html;
-    document.getElementById("n6").disabled=!ready;
-
-    window.getMemoryAnswers=function(){return JSON.stringify(state);};
-  }
-  render();
-})();
-</script>
 </body>
 </html>
