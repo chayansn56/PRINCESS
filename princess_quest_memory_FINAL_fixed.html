@@ -26,7 +26,7 @@ h2{font-size:clamp(31px,6vw,52px);margin:7px 0 17px}h3{margin:24px 0 10px}p{font
 .choice{position:relative;border:1px solid var(--line);background:#fff;border-radius:20px;padding:16px;text-align:left;min-height:88px;transition:.18s}
 .choice:hover{transform:translateY(-2px);box-shadow:0 10px 28px #c94f8417}.choice.selected{border:2px solid var(--pink);background:#fff7fb}.choice.selected:after{content:"✓";position:absolute;right:10px;top:9px;width:23px;height:23px;line-height:23px;text-align:center;background:var(--pink);color:#fff;border-radius:50%;font-size:12px}
 .choice.locked{opacity:.43;pointer-events:none;filter:grayscale(.4)}.choice.correct{border:2px solid var(--good);background:#f2fbf5}.choice.wrong{border:2px solid #d889a8;background:#fff1f6}
-.choice b{display:block;margin-bottom:5px}.choice .tag{font-size:11px;font-weight:700;color:var(--pink);text-transform:uppercase;letter-spacing:1px}
+.choice b{display:block;margin-bottom:5px}.choice input.memCheck{width:18px;height:18px;accent-color:var(--pink);vertical-align:middle;margin:0 7px 0 0}.choice:has(input.memCheck:checked){border:2px solid var(--pink);background:#fff7fb}.choice .tag{font-size:11px;font-weight:700;color:var(--pink);text-transform:uppercase;letter-spacing:1px}
 .btn{border:0;border-radius:999px;padding:13px 21px;background:var(--ink);color:white;font-weight:700;margin:5px}.btn.pink{background:var(--pink)}.btn.soft{background:#f7e4ed;color:#8e325f}.btn.gold{background:#c59b43}.btn:disabled{opacity:.35;cursor:not-allowed}
 .level-status{display:flex;justify-content:space-between;gap:12px;align-items:center;margin:10px 0 6px}.taskbar{height:9px;background:#f0dce5;border-radius:99px;overflow:hidden}.taskbar span{display:block;height:100%;width:0;background:var(--pink);transition:.4s}
 .actions{display:flex;justify-content:space-between;gap:10px;align-items:center;border-top:1px solid #f1e4ea;margin-top:24px;padding-top:16px}.actions .next{display:inline-block;margin-left:auto}.actions .next:disabled{opacity:.35;cursor:not-allowed}
@@ -156,7 +156,7 @@ footer{text-align:center;color:var(--muted);font-size:12px;margin-top:20px}
 <div class="eyebrow">LEVEL 5 · MEMORY LANE</div>
 <h2>🗺️ What Do You Remember Most?</h2>
 <p>Now Princess gets to choose. ❤️</p>
-<p>Think about the little things, adventures, food, and moments you remember most. <b>You can choose as many as you like.</b></p>
+<p>Choose as many as you like. <b>The options are real checkboxes, so they stay clickable even if the rest of the game has a problem.</b></p>
 
 <div class="level-status">
   <span id="memStatus"><b>0 choices made</b></span>
@@ -167,52 +167,52 @@ footer{text-align:center;color:var(--muted);font-size:12px;margin-top:20px}
 <h3>🌊 OUR ADVENTURES</h3>
 <p class="small">Which part of our adventures do you remember or like the most?</p>
 <div class="grid">
-<button type="button" class="choice" onclick="memoryToggle(this,'adventures','Water / Sea')">🌊 <b>Water / Sea</b></button>
-<button type="button" class="choice" onclick="memoryToggle(this,'adventures','Nature & Trees')">🌳 <b>Nature & Trees</b></button>
-<button type="button" class="choice" onclick="memoryToggle(this,'adventures','Travelling Together')">✈️ <b>Travelling Together</b></button>
-<button type="button" class="choice" onclick="memoryToggle(this,'adventures','Exploring New Places')">📍 <b>Exploring New Places</b></button>
+<label class="choice"><input class="memCheck" type="checkbox" data-group="adventures" data-value="Water / Sea"> 🌊 <b>Water / Sea</b></label>
+<label class="choice"><input class="memCheck" type="checkbox" data-group="adventures" data-value="Nature & Trees"> 🌳 <b>Nature & Trees</b></label>
+<label class="choice"><input class="memCheck" type="checkbox" data-group="adventures" data-value="Travelling Together"> ✈️ <b>Travelling Together</b></label>
+<label class="choice"><input class="memCheck" type="checkbox" data-group="adventures" data-value="Exploring New Places"> 📍 <b>Exploring New Places</b></label>
 </div>
 
 <h3>🍽️ OUR FOOD MOMENTS</h3>
 <p class="small">Which food memory do you remember or like the most?</p>
 <div class="grid">
-<button type="button" class="choice" onclick="memoryToggle(this,'food','Shrimp')">🍤 <b>Shrimp</b></button>
-<button type="button" class="choice" onclick="memoryToggle(this,'food','Beef')">🥩 <b>Beef</b></button>
-<button type="button" class="choice" onclick="memoryToggle(this,'food','Pork')">🐖 <b>Pork</b></button>
-<button type="button" class="choice" onclick="memoryToggle(this,'food','Frog')">🐸 <b>Frog</b></button>
-<button type="button" class="choice" onclick="memoryToggle(this,'food','Eating Outside Together')">🍽️ <b>Eating Outside Together</b></button>
+<label class="choice"><input class="memCheck" type="checkbox" data-group="food" data-value="Shrimp"> 🍤 <b>Shrimp</b></label>
+<label class="choice"><input class="memCheck" type="checkbox" data-group="food" data-value="Beef"> 🥩 <b>Beef</b></label>
+<label class="choice"><input class="memCheck" type="checkbox" data-group="food" data-value="Pork"> 🐖 <b>Pork</b></label>
+<label class="choice"><input class="memCheck" type="checkbox" data-group="food" data-value="Frog"> 🐸 <b>Frog</b></label>
+<label class="choice"><input class="memCheck" type="checkbox" data-group="food" data-value="Eating Outside Together"> 🍽️ <b>Eating Outside Together</b></label>
 </div>
 
 <h3>🤝 OUR LITTLE MOMENTS</h3>
 <p class="small">Which little thing do you remember or like the most?</p>
 <div class="grid">
-<button type="button" class="choice" onclick="memoryToggle(this,'little','Holding Hands')">🤝 <b>Holding Hands</b></button>
-<button type="button" class="choice" onclick="memoryToggle(this,'little','Laughing Together')">😂 <b>Laughing Together</b></button>
-<button type="button" class="choice" onclick="memoryToggle(this,'little','Listening to Music')">🎵 <b>Listening to Music</b></button>
-<button type="button" class="choice" onclick="memoryToggle(this,'little','Flowers / Little Surprises')">🌹 <b>Flowers / Little Surprises</b></button>
-<button type="button" class="choice" onclick="memoryToggle(this,'little','Just Being Together')">❤️ <b>Just Being Together</b></button>
+<label class="choice"><input class="memCheck" type="checkbox" data-group="little" data-value="Holding Hands"> 🤝 <b>Holding Hands</b></label>
+<label class="choice"><input class="memCheck" type="checkbox" data-group="little" data-value="Laughing Together"> 😂 <b>Laughing Together</b></label>
+<label class="choice"><input class="memCheck" type="checkbox" data-group="little" data-value="Listening to Music"> 🎵 <b>Listening to Music</b></label>
+<label class="choice"><input class="memCheck" type="checkbox" data-group="little" data-value="Flowers / Little Surprises"> 🌹 <b>Flowers / Little Surprises</b></label>
+<label class="choice"><input class="memCheck" type="checkbox" data-group="little" data-value="Just Being Together"> ❤️ <b>Just Being Together</b></label>
 </div>
 
 <h3>💕 THE ONE THAT MEANS THE MOST</h3>
 <p class="small">Which memory would you choose to experience again?</p>
 <div class="grid">
-<button type="button" class="choice" onclick="memoryToggle(this,'most','An Adventure Together')">🌊 <b>An Adventure Together</b></button>
-<button type="button" class="choice" onclick="memoryToggle(this,'most','Eating Together')">🍽️ <b>Eating Together</b></button>
-<button type="button" class="choice" onclick="memoryToggle(this,'most','Holding Hands')">🤝 <b>Holding Hands</b></button>
-<button type="button" class="choice" onclick="memoryToggle(this,'most','A Simple Day Together')">❤️ <b>A Simple Day Together</b></button>
+<label class="choice"><input class="memCheck" type="checkbox" data-group="most" data-value="An Adventure Together"> 🌊 <b>An Adventure Together</b></label>
+<label class="choice"><input class="memCheck" type="checkbox" data-group="most" data-value="Eating Together"> 🍽️ <b>Eating Together</b></label>
+<label class="choice"><input class="memCheck" type="checkbox" data-group="most" data-value="Holding Hands"> 🤝 <b>Holding Hands</b></label>
+<label class="choice"><input class="memCheck" type="checkbox" data-group="most" data-value="A Simple Day Together"> ❤️ <b>A Simple Day Together</b></label>
 </div>
 
 <div class="own-answer">
 <h3>✍️ Add Your Own Answer</h3>
 <p class="small">Something else you remember that isn't here?</p>
 <input id="ownMemoryAnswer" type="text" placeholder="Write your own memory...">
-<button type="button" class="btn soft" onclick="addOwnMemory()">ADD MY ANSWER ❤️</button>
+<button type="button" class="btn soft" id="addMemoryAnswer">ADD MY ANSWER ❤️</button>
 <div id="ownMemoryList" class="chips"></div>
 </div>
 
 <div id="memorySummary" class="notice">
 <b>🗺️ YOUR MEMORY MAP</b><br><br>
-Choose anything that means something to you. ❤️
+Choose at least one answer in each section. ❤️
 </div>
 
 <div class="actions">
@@ -222,86 +222,55 @@ Choose anything that means something to you. ❤️
 </div></section>
 <script>
 (function(){
-  var memoryState={adventures:[],food:[],little:[],most:[],own:[]};
+  function qAll(sel){return Array.prototype.slice.call(document.querySelectorAll(sel));}
+  function renderMemory(){
+    var checks=qAll(".memCheck");
+    var total=0, groups={adventures:0,food:0,little:0,most:0};
+    checks.forEach(function(c){ if(c.checked){ total++; groups[c.dataset.group]++; c.closest(".choice").classList.add("selected"); } else { c.closest(".choice").classList.remove("selected"); }});
+    var own=(document.getElementById("ownMemoryList").children.length||0);
+    var totalShown=total+own;
+    document.getElementById("memStatus").innerHTML="<b>"+totalShown+" choices made</b>";
+    document.getElementById("memBar").style.width=Math.min(100,(totalShown/5)*100)+"%";
 
-  function esc(v){
-    return String(v).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
-  }
-
-  function total(){
-    return memoryState.adventures.length+memoryState.food.length+memoryState.little.length+memoryState.most.length+memoryState.own.length;
-  }
-
-  function render(){
-    var n=total();
-    var status=document.getElementById("memStatus");
-    var bar=document.getElementById("memBar");
-    var summary=document.getElementById("memorySummary");
-    if(status) status.innerHTML="<b>"+n+" choices made</b>";
-    if(bar) bar.style.width=Math.min(100,(n/5)*100)+"%";
-
-    var out="<b>🗺️ YOUR MEMORY MAP</b><br><br>";
-    var any=false;
-    [["adventures","🌊 Adventures"],["food","🍽️ Food moments"],["little","🤝 Little moments"],["most","💕 Most meaningful"],["own","✍️ Princess's own answers"]].forEach(function(pair){
-      var arr=memoryState[pair[0]];
+    var html="<b>🗺️ YOUR MEMORY MAP</b><br><br>";
+    if(total===0 && !own) html+="Choose at least one answer in each section. ❤️";
+    ["adventures","food","little","most"].forEach(function(g){
+      var arr=checks.filter(function(c){return c.checked && c.dataset.group===g;}).map(function(c){return c.dataset.value;});
       if(arr.length){
-        any=true;
-        out+="<b>"+pair[1]+"</b><br>";
-        arr.forEach(function(v){out+="<span class='memory-summary-item'>"+esc(v)+"</span>"});
-        out+="<br><br>";
+        var title={adventures:"🌊 Adventures",food:"🍽️ Food moments",little:"🤝 Little moments",most:"💕 Most meaningful"}[g];
+        html+="<b>"+title+"</b><br>"+arr.map(function(v){return "<span class='memory-summary-item'>"+v+"</span>";}).join("")+"<br><br>";
       }
     });
-    if(!any) out+="Choose anything that means something to you. ❤️";
-
-    // Require at least one answer in the four main sections.
-    var ready=memoryState.adventures.length>0 &&
-              memoryState.food.length>0 &&
-              memoryState.little.length>0 &&
-              memoryState.most.length>0;
-    if(ready) out+="<b>✅ Memory map complete.</b><br>Princess can continue.";
-    if(summary) summary.innerHTML=out;
-    var next=document.getElementById("next6");
-    if(next) next.disabled=!ready;
+    if(own){
+      html+="<b>✍️ Princess's own answers</b><br>";
+      qAll("#ownMemoryList .chip").forEach(function(c){html+="<span class='memory-summary-item'>"+c.textContent+"</span>";});
+      html+="<br><br>";
+    }
+    var ready=groups.adventures>0 && groups.food>0 && groups.little>0 && groups.most>0;
+    if(ready) html+="<b>✅ Memory map complete.</b><br>Princess can continue.";
+    document.getElementById("memorySummary").innerHTML=html;
+    document.getElementById("next6").disabled=!ready;
   }
 
-  window.memoryToggle=function(btn,group,value){
-    var arr=memoryState[group];
-    var i=arr.indexOf(value);
-    if(i===-1){
-      arr.push(value);
-      btn.classList.add("selected");
-      if(window.add) window.add(1,10);
-    }else{
-      arr.splice(i,1);
-      btn.classList.remove("selected");
-    }
-    render();
-  };
+  qAll(".memCheck").forEach(function(c){
+    c.addEventListener("change",function(){renderMemory();});
+  });
 
-  window.addOwnMemory=function(){
+  document.getElementById("addMemoryAnswer").addEventListener("click",function(){
     var input=document.getElementById("ownMemoryAnswer");
     var value=(input.value||"").trim();
     if(!value){
       document.getElementById("memorySummary").innerHTML="<b>✍️ Add Your Own Answer</b><br><br>Write something first. ❤️";
       return;
     }
-    memoryState.own.push(value);
-    var list=document.getElementById("ownMemoryList");
     var chip=document.createElement("span");
-    chip.className="chip";
-    chip.textContent="✍️ "+value;
-    if(list) list.appendChild(chip);
+    chip.className="chip"; chip.textContent="✍️ "+value;
+    document.getElementById("ownMemoryList").appendChild(chip);
     input.value="";
-    if(window.add) window.add(1,10);
-    render();
-  };
+    renderMemory();
+  });
 
-  window.getMemoryAnswers=function(){
-    return JSON.stringify(memoryState);
-  };
-
-  // Expose immediately and render once after this script loads.
-  render();
+  renderMemory();
 })();
 </script>
 
@@ -561,7 +530,7 @@ byId("msgForm").addEventListener("submit",function(){
   byId("extraRoyalEmail").value=[...byId("ownRoyalList").children].map(x=>x.textContent).join("\n");
   byId("customDayEmail").value="Food: "+day.food.join(" · ")+" | Place: "+day.place.join(" · ")+" | Vibe: "+day.vibe.join(" · ");
   byId("extraMemoryEmail").value=[...byId("ownMemoryList").children].map(x=>x.textContent).join("\n");
-  byId("apologyReplyEmail").value=(byId("ownApologyReply").value||"").trim();if(byId("memoryAnswersEmail")&&window.getMemoryAnswers)byId("memoryAnswersEmail").value=window.getMemoryAnswers();if(window.__memoryAnswersForEmail)byId("memoryAnswersEmail").value=window.__memoryAnswersForEmail();
+  byId("apologyReplyEmail").value=(byId("ownApologyReply").value||"").trim();if(byId("memoryAnswersEmail")){var ms=[];document.querySelectorAll(".memCheck:checked").forEach(function(c){ms.push(c.dataset.group+": "+c.dataset.value)});document.querySelectorAll("#ownMemoryList .chip").forEach(function(c){ms.push("own: "+c.textContent)});byId("memoryAnswersEmail").value=ms.join("\n");}if(window.__memoryAnswersForEmail)byId("memoryAnswersEmail").value=window.__memoryAnswersForEmail();
   status.innerHTML='<div class="notice">💌 Your message is being sent...</div>';
   setTimeout(function(){
     status.innerHTML='<div class="notice"><b>💌 Submitted.</b><br>If Formspree is connected to your email, the message and the answers will arrive there. ❤️</div>';
